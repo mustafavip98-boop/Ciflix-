@@ -189,7 +189,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 .withValues(alpha: opacity),
           ),
         ),
-        title: Text(l10n.appTitle),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFFB77AFF), Color(0xFF7438D8)],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF9B5CFF).withValues(alpha: 0.28),
+                    blurRadius: 12,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 23,
+              ),
+            ),
+            const SizedBox(width: 9),
+            ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                colors: [Color(0xFFF7F1FF), Color(0xFFB77AFF), Color(0xFF35D6E8)],
+              ).createShader(bounds),
+              child: const Text(
+                'CifliX',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 21,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.3,
+                ),
+              ),
+            ),
+          ],
+        ),
         actions: [
           // 1. Search Action Button
           Padding(
