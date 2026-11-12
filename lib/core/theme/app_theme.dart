@@ -44,9 +44,9 @@ class AppTheme {
   static const Color background = Color(0xFF0F0F13); // Deep dark blue-grey
   static const Color surface = Color(0xFF18181F);
   static const Color surfaceHighlight = Color(0xFF22222E);
-  static const Color primary = Color(0xFF448AFF); // Blue Accent
-  static const Color primaryVariant = Color(0xFF2962FF); // Blue Accent Darker
-  static const Color secondary = Color(0xFF10B981); // Emerald
+  static const Color primary = Color(0xFF9B5CFF); // Blue Accent
+  static const Color primaryVariant = Color(0xFF7438D8); // Blue Accent Darker
+  static const Color secondary = Color(0xFF35D6E8); // Emerald
   static const Color error = Color(0xFFEF4444);
   static const Color onSurface = Color(0xFFE5E7EB);
   static const Color textSecondary = Color(0xFF9CA3AF);
@@ -123,7 +123,7 @@ class AppTheme {
     var colorScheme =
         dynamicScheme ??
         ColorScheme.fromSeed(
-          seedColor: const Color(0xFF448AFF), // Blue Accent seed
+          seedColor: const Color(0xFF9B5CFF), // Blue Accent seed
           brightness: Brightness.dark,
           surface: const Color(0xFF000000), // Default surface
         );
