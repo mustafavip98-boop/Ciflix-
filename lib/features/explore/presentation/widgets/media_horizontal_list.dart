@@ -182,11 +182,25 @@ class _MediaHorizontalListState extends State<MediaHorizontalList> {
                     ),
                     const SizedBox(height: 4),
                     Container(
-                      width: isDesktop ? 30 : 20, // Accent width
+                      width: isDesktop ? 38 : 28,
                       height: 3,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(2),
+                        gradient: const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Color(0xFF9B5CFF),
+                            Color(0xFF35D6E8),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF9B5CFF).withValues(alpha: 0.32),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                     ),
                   ],
