@@ -41,9 +41,9 @@ class AppTheme {
   }
 
   // Premium Colors
-  static const Color background = Color(0xFF0F0F13); // Deep dark blue-grey
-  static const Color surface = Color(0xFF18181F);
-  static const Color surfaceHighlight = Color(0xFF22222E);
+  static const Color background = Color(0xFF0C0814); // Deep dark blue-grey
+  static const Color surface = Color(0xFF171222);
+  static const Color surfaceHighlight = Color(0xFF28203A);
   static const Color primary = Color(0xFF9B5CFF); // Blue Accent
   static const Color primaryVariant = Color(0xFF7438D8); // Blue Accent Darker
   static const Color secondary = Color(0xFF35D6E8); // Emerald
@@ -125,11 +125,11 @@ class AppTheme {
         ColorScheme.fromSeed(
           seedColor: const Color(0xFF9B5CFF), // Blue Accent seed
           brightness: Brightness.dark,
-          surface: const Color(0xFF000000), // Default surface
+          surface: const Color(0xFF090711), // CifliX deep violet-black surface
         );
 
     // Ensure surface is always Pitch Black for list items/cards
-    colorScheme = colorScheme.copyWith(surface: const Color(0xFF000000));
+    colorScheme = colorScheme.copyWith(surface: const Color(0xFF090711));
 
     return ThemeData(
       useMaterial3: true,
