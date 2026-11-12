@@ -1,0 +1,71 @@
+name: CifliX Android Build
+
+on:
+  push:
+    branches:
+      - ciflix/premium-rebrand
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: 3.47.7
+
+jobs:
+  android:
+    name: Build CifliX Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout CifliX
+        uses: actions/checkout@v7
+        with:
+          ref: ciflix/premium-rebrand
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: gradle
+
+      - name: Install dependencies and generate code
+        run: |
+          flutter pub get
+          flutter gen-l10n
+          dart run build_runner build --delete-conflicting-outputs
+
+      - name: Remove desktop-only torrent binaries
+        run: rm -f packages/flutter_torrent_server/assets/torrserver/TorrServer-*
+
+      - name: Prepare optional API configuration
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          TRAKT_CLIENT_ID: ${{ secrets.TRAKT_CLIENT_ID }}
+          ANILIST_CLIENT_ID: ${{ secrets.ANILIST_CLIENT_ID }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          keys = ["TMDB_API_KEY", "TRAKT_CLIENT_ID", "ANILIST_CLIENT_ID"]
+          with open("dart-defines.json", "w") as f:
+              json.dump({k: os.environ.get(k, "") for k in keys}, f)
+          PY
+
+      - name: Build universal APK
+        run: flutter build apk --release --dart-define-from-file=dart-defines.json
+
+      - name: Upload CifliX APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: CifliX-Android-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 14
